@@ -14,7 +14,6 @@ const bodySchema = z.object({
 
 export async function createTranscriptionRoute(app: FastifyInstance) {
   app.post('/videos/:videoId/transcription', async (request, reply) => {
-    console.log("create transcription route", request.body);
     const { videoId } = paramsSchema.parse(request.params);
 
     const { prompt } = bodySchema.parse(request.body);
@@ -33,15 +32,15 @@ export async function createTranscriptionRoute(app: FastifyInstance) {
       file: audioReadStream,
       model: 'whisper-1',
       language: 'pt',
-      response_format: 'verbose_json',
+      response_format: 'json',
       temperature: 0,
       prompt: prompt,
-      timestamp_granularities: ['segment']
     }).catch((error) => {
       console.error("openai error", error);
       throw new Error("Failed to generate transcription");
     });
-    console.log("openai", response);
+
+    console.log("openai response", response);
 
     const transcription = response.text;
 

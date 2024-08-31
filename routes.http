@@ -33,7 +33,7 @@ POST http://localhost:3333/ai/complete
 Content-Type: application/json
 
 {
-  "videoId": "1",
+  "videoId": "573631b0-bc30-4dc4-b7c1-6e36d1bd464a",
   "temperature": 0.5,
   "prompt":"Gere um resumo do vídeo a seguir: '''{transcription}'''"
 }
